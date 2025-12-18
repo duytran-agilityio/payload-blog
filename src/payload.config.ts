@@ -1,5 +1,8 @@
 import { postgresAdapter } from '@payloadcms/db-postgres';
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import {
+  FixedToolbarFeature,
+  lexicalEditor,
+} from '@payloadcms/richtext-lexical';
 import path from 'path';
 import { buildConfig } from 'payload';
 import { fileURLToPath } from 'url';
@@ -8,6 +11,8 @@ import sharp from 'sharp';
 import { Users } from './collections/Users';
 import { Media } from './collections/Media';
 import { env } from './lib/env';
+import { Articles } from './collections/Articales/config';
+import { ArticaleAuthors } from './collections/ArticaleAuthors';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -23,8 +28,12 @@ export default buildConfig({
       password: env.CMS_SEED_ADMIN_PASSWORD,
     },
   },
-  collections: [Users, Media],
-  editor: lexicalEditor(),
+  collections: [Users, Media, Articles, ArticaleAuthors],
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => {
+      return [...defaultFeatures, FixedToolbarFeature()];
+    },
+  }),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
