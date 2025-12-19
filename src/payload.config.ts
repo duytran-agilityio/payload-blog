@@ -12,7 +12,7 @@ import { Users } from './collections/Users';
 import { Media } from './collections/Media';
 import { env } from './lib/env';
 import { Articles } from './collections/Articales/config';
-import { ArticaleAuthors } from './collections/ArticaleAuthors';
+import { ArticaleAuthors } from './collections/ArticaleAuthors/config';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);

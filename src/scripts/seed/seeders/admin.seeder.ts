@@ -1,10 +1,8 @@
-import { getPayload } from 'payload';
-import config from '../../../payload.config';
+import { Payload } from 'payload';
 import { isDuplicateError } from '../lib/is-duplicate-error';
 import { env } from '@/lib/env';
 
-export async function adminSeeder() {
-  const payload = await getPayload({ config });
+export async function adminSeeder(payload: Payload) {
   try {
     await payload.create({
       collection: 'users',
